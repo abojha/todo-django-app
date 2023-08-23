@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/todo.css' %}">
+{% endblock head %}
+
+{% block title %}
+    Todo lulu
+{% endblock title %}
+
+
+
+{% block content %}
+    <div class="form">
+        <form action="" method="post" class="form-container">
+            {% csrf_token %}
+            <div class="form_field">
+                <span class = "todo_tag">{{form.todo_title.label_tag}}</span> : {{form.todo_title}}
+            </div>
+            <div class="form-field">
+                <span class = "todo_tag">{{form.todo_description.label_tag}}</span>:{{form.todo_description}}
+            </div>
+            <button type="submit" class='submit-button'>Submit</button>
+        </form>
+        
+    </div>
+    <div class="todo-list-frame">
+        {% for todo in object_list %}
+        <div class="list-item">
+            <div class="list-item-title">{{todo.todo_title}}</div>
+            <div class="list-item-description">{{todo.todo_description}}</div>
+           <form action="{% url 'todo_delete' todo.pk %}" method='post' class='form-container'>
+            {% csrf_token %}
+            <input type="submit" value='Done' class='submit-button'>
+           </form>
+        </div>
+            
+        {% endfor %}
+    </div>
+{% endblock content %}
+

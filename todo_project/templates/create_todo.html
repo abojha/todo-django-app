@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block head %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/todo.css' %}">
+{% endblock head %}
+{% block content %}
+    <h1>Create Your New Todo</h1>
+    <form action="" method='post'>
+        {% csrf_token %}
+        {{form.as_p}}
+        <button class="save" type='submit'>Submit</button>
+    </form>
+{% endblock content %}
+
